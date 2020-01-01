@@ -114,3 +114,21 @@ const res = arr.includes('node.js');
 console.log(ret);
 console.log(res);
 ```
+
+### 14. forEach
+
+forEach 내부에서 실행되는 코드들은 비동기적으로 실행되지 않기때문에 비동기 코드를 실행할때 주의하여야한다.
+
+```js
+'use strict';
+
+// forEach
+const arr = [1,2,3];
+const newArr = [];
+arr.forEach((item) => {
+    newArr.push(item);
+});
+
+console.log(newArr);
+// [1,2,3]
+```
