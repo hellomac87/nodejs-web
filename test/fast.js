@@ -1,36 +1,20 @@
 'use strict';
 
-// Object.assign vs spread
+const test = new Set();
 
-const obj = {
-    title: 'node.js 올인원 패키지'
+test.add(1);
+test.add(1);
+test.add(2);
+test.add(3);
+test.add(4);
+
+console.log(test);
+console.log(typeof test);
+
+for(const item of test){
+    console.log(item);
 }
 
-const newObj = {
-    name: '패스트캠퍼스'
-}
-
-// 객체를 하나로 합칠때
-// Object.assign
-
-const ret = Object.assign({}, obj, newObj);
-
-// 가독성 
-const spreadRet = {
-    ...obj,
-    ...newObj
-}
-
-// 객체 뿐만 아니라 Array type 에서도 활용 가능
-
-const arr = [1,2,3]; 
-const newArr = [4,5,6]; 
-
-const spreadArr = [
-    ...arr,
-    ...newArr
-]
+const ret = test.has(2);
 
 console.log(ret);
-console.log(spreadRet);
-console.log(spreadArr);
