@@ -224,3 +224,15 @@ const ret = test.has(2);
 console.log(ret);
 
 ```
+
+### 21. some
+
+```js
+'use strict';
+
+const arr = [1, 2, 0, -1, -2];
+
+const res = arr.some(key => key < 0);
+
+console.log(res);
+```

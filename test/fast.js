@@ -1,20 +1,7 @@
 'use strict';
 
-const test = new Set();
+const arr = [1, 2, 0, -1, -2];
 
-test.add(1);
-test.add(1);
-test.add(2);
-test.add(3);
-test.add(4);
+const res = arr.some(key => key < 0);
 
-console.log(test);
-console.log(typeof test);
-
-for(const item of test){
-    console.log(item);
-}
-
-const ret = test.has(2);
-
-console.log(ret);
+console.log(res);
