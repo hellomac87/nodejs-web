@@ -1,7 +1,20 @@
 'use strict';
 
-const arr = [1, 2, 0, -1, -2];
+// static method
+// class 를 생성하지 않고 class 내부에 바로 접근하여 함수를 실행할 수 있다.
 
-const res = arr.some(key => key < 0);
+class test {
+    constructor(){
+        this.config = {};
+    }
 
-console.log(res);
+    fn(){}
+
+    static call(){
+        // staic method 내에서는 constructor 에서 생성된 객체에 접근할 수 없다.
+        console.log('static method');
+    }
+}
+
+// class 에서 생성자 없이 바로 호출 가능하다.
+test.call();
