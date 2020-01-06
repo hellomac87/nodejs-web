@@ -260,3 +260,13 @@ class test {
 // class 에서 생성자 없이 바로 호출 가능하다.
 test.call();
 ```
+
+### 23. node vs browser
+
+node 에서는 `window` 라는 객체는 존재하지 않는다.
+
+node 에서는 별도 세팅이 없다면 require 문법을 사용해야한다.
+
+`const, let, var` 의 스코프의 차이점을 잘 알아두도록 하자
+
+`const, let`은 block scope, var 는 global scope
