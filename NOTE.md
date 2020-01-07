@@ -270,3 +270,29 @@ node 에서는 별도 세팅이 없다면 require 문법을 사용해야한다.
 `const, let, var` 의 스코프의 차이점을 잘 알아두도록 하자
 
 `const, let`은 block scope, var 는 global scope
+
+### 24. String
+
+```js
+'use strict';
+
+let string = 'node.js 올인원 패키지';
+
+let isStartWith = string.startsWith('n');
+
+let isIncludes = string.includes('ㅁㄴㅇ');
+
+let isEndWith = string.endsWith('지');
+
+// console.log({isStartWith,isIncludes,isEndWith});
+const checkIfContains = () => {
+    if((isStartWith || isIncludes) && isEndWith){
+        return true;
+    }
+}
+
+const ret = checkIfContains();
+
+console.log(ret);
+
+```
