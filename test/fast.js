@@ -1,20 +1,12 @@
 'use strict';
 
-let string = 'node.js 올인원 패키지';
+const details = `자세한 내용`;
+let str = `node.js`;
 
-let isStartWith = string.startsWith('n');
+str += ` 올인원 패키지 ${details}`;
 
-let isIncludes = string.includes('ㅁㄴㅇ');
+const int = 1;
 
-let isEndWith = string.endsWith('지');
+str += `${str}의 값은 ${int}`;
 
-// console.log({isStartWith,isIncludes,isEndWith});
-const checkIfContains = () => {
-    if((isStartWith || isIncludes) && isEndWith){
-        return true;
-    }
-}
-
-const ret = checkIfContains();
-
-console.log(ret);
+console.log(str);
