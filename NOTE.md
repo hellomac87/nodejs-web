@@ -313,3 +313,17 @@ str += `${str}의 값은 ${int}`;
 console.log(str);
 
 ```
+
+### 26. Type checking
+
+```js
+'use strict';
+
+const string ='node.js';
+const array = [];
+const obj = {};
+const number = 1;
+
+console.log(typeof number);
+
+```
