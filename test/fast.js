@@ -1,17 +1,7 @@
-'use strict';
-
-// hoisting
-console.log(var1);
-
-// let var1 = 'r';
-var var1 = 'r';
-
-
-fn();
-
-function fn(){
-    console.log('fn');
-}
-
-// var 는 미리 선언하지 않아도 전역변수로 선언되기 때문에
-// 나중에 선언되더라도 코드의 최상단에 선언된것 처럼 실행한다.
+// IIFE
+(function fn(){
+    var confidential = 'this is secret';
+    console.log('IIFE');
+})();
+// 외부에서 해당 함수의 변수나 객체에 대한 접근 통제
+// console.log(confidential);

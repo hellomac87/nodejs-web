@@ -348,3 +348,20 @@ function fn(){
 // var 는 미리 선언하지 않아도 전역변수로 선언되기 때문에
 // 나중에 선언되더라도 코드의 최상단에 선언된것 처럼 실행한다.
 ```
+
+### 28. IIFE
+
+Immediatle Invoked Fuction Express (즉시 실행되는 함수 표현)
+
+- 해당하는 함수 실행이나 객체의 접근을 보호할때 사용된다.
+
+```js
+// IIFE
+(function fn(){
+    var confidential = 'this is secret';
+    console.log('IIFE');
+})();
+// 외부에서 해당 함수의 변수나 객체에 대한 접근 통제
+// console.log(confidential);
+```
+
