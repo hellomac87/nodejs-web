@@ -365,3 +365,14 @@ Immediatle Invoked Fuction Express (즉시 실행되는 함수 표현)
 // console.log(confidential);
 ```
 
+### 29. setInterval
+
+```js
+'use strict';
+// setInterval
+setInterval(() => {
+    console.log('this is repeated');
+}, 1000)
+
+```
+
