@@ -1,14 +1,22 @@
 'use strict';
-// event emitter
-const EventEmitter = require('events');
+// error handling
 
-class ChatManager extends EventEmitter{}
+const CustomError = (message) => {
+    this.message = message;
+    this.type = 'NotImageFileException';
+}
 
-const chatManager = new ChatManager();
+try {
+    const  imgTypes = ['.jpg', '.png', '.gif'];
+    const filename = 'fast.doc';
 
-chatManager.on("join", () => {
-    console.log('new user joined');
-});
+    const isImageFIle = imgTypes.find(ext => filename.endsWith(ext));
 
-chatManager.emit("join");
+    if(!isImageFIle){
+        throw new CustomError('this is not an image file');
+    }
+
+} catch (e) {
+    console.error(e);
+}
 
