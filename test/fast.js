@@ -1,22 +1,23 @@
 'use strict';
-// error handling
 
-const CustomError = (message) => {
-    this.message = message;
-    this.type = 'NotImageFileException';
+const CustomError = (message, type) => ({
+    message: `Error: ${message}`,
+    type: `API::${type}`
+})
+
+const whiteList = ['.png', '.gif', '.jpg'];
+
+const data = [];
+
+const isValidImageFIles = (data, type) => {
+    data.forEach(item => {
+        // console.log(item);
+        const ret = whiteList.find(_item => item.endsWith(_item));
+        if(ret) return true;
+        return false;
+    })
 }
 
-try {
-    const  imgTypes = ['.jpg', '.png', '.gif'];
-    const filename = 'fast.doc';
-
-    const isImageFIle = imgTypes.find(ext => filename.endsWith(ext));
-
-    if(!isImageFIle){
-        throw new CustomError('this is not an image file');
-    }
-
-} catch (e) {
-    console.error(e);
+if(!isValidImageFIles(['fast.pptx'])){
+    throw CustomError('isValidImageFiles','invalidRequest');
 }
-
