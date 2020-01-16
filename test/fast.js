@@ -1,23 +1,28 @@
 'use strict';
+// arrow fucntions
 
-const CustomError = (message, type) => ({
-    message: `Error: ${message}`,
-    type: `API::${type}`
-})
+/*
+function add (var1, var2) {
+     return var1 + var2;
+}
+*/
 
-const whiteList = ['.png', '.gif', '.jpg'];
+const add = (var1, var2) => var1 + var2;
+const ret = add(1, 2);
+console.log(ret);
 
-const data = [];
-
-const isValidImageFIles = (data, type) => {
-    data.forEach(item => {
-        // console.log(item);
-        const ret = whiteList.find(_item => item.endsWith(_item));
-        if(ret) return true;
-        return false;
+API.prototype.get = function (resource) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+        http.get(self.uri + resource, function (data) {
+            resolve(data);
+        })
     })
 }
 
-if(!isValidImageFIles(['fast.pptx'])){
-    throw CustomError('isValidImageFiles','invalidRequest');
-}
+API.prototype.get = (resource) =>
+    new Promise((resolve, reject) => {
+        http.get(self.uri + resource,  (data) => {
+            resolve(data);
+        })
+    });
