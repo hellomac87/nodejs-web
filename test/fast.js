@@ -1,28 +1,16 @@
 'use strict';
-// arrow fucntions
+// arrow fucntions practice
 
-/*
-function add (var1, var2) {
-     return var1 + var2;
-}
-*/
-
-const add = (var1, var2) => var1 + var2;
-const ret = add(1, 2);
-console.log(ret);
-
-API.prototype.get = function (resource) {
-    var self = this;
-    return new Promise(function (resolve, reject) {
-        http.get(self.uri + resource, function (data) {
-            resolve(data);
-        })
-    })
+// Curried Function
+function getDiscount (price, rate) {
+    return price * rate;
 }
 
-API.prototype.get = (resource) =>
-    new Promise((resolve, reject) => {
-        http.get(self.uri + resource,  (data) => {
-            resolve(data);
-        })
-    });
+const getDiscount = (price, rate) => price * rate;
+const getTenpercentOff = 0.1;
+
+getDiscount(10000, 0.1);
+
+// 비율에 대해서 선언할 필요 없이 단 한번만 선언되어서
+// 회원의 등급이 다양할 경우
+// 한번만 비율에 대해 선언하고.
