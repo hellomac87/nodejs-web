@@ -1,16 +1,25 @@
 'use strict';
 // arrow fucntions practice
-
 // Curried Function
-function getDiscount (price, rate) {
-    return price * rate;
-}
+// Closure
 
-const getDiscount = (price, rate) => price * rate;
-const getTenpercentOff = 0.1;
+/*
+"use strict";
 
-getDiscount(10000, 0.1);
+var getDiscount = function getDiscount(rate) {
+  return function (price) {
+    return rate * price;
+  };
+};
+*/
 
-// 비율에 대해서 선언할 필요 없이 단 한번만 선언되어서
-// 회원의 등급이 다양할 경우
-// 한번만 비율에 대해 선언하고.
+const getDiscount = rate => price => price * rate;
+
+const getTenpercentOff = getDiscount(0.1);
+
+const ret = getTenpercentOff(10000);
+console.log(ret)
+
+// f(x) = x + 1
+// g(x) = x^2
+// h(x) = f(g(x))
