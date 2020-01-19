@@ -477,3 +477,5 @@ API.prototype.get = (resource) =>
         })
     });
 ```
+
+### 33. Class

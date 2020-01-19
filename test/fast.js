@@ -1,25 +1,12 @@
 'use strict';
-// arrow fucntions practice
-// Curried Function
-// Closure
+// Class
+class cacheManager {
+    constructor(){
+        // 동기화된 코드로만 작성가능
+        this.config = [];
+    }
+}
 
-/*
-"use strict";
+const CacheManager = new cacheManager();
 
-var getDiscount = function getDiscount(rate) {
-  return function (price) {
-    return rate * price;
-  };
-};
-*/
-
-const getDiscount = rate => price => price * rate;
-
-const getTenpercentOff = getDiscount(0.1);
-
-const ret = getTenpercentOff(10000);
-console.log(ret)
-
-// f(x) = x + 1
-// g(x) = x^2
-// h(x) = f(g(x))
+console.log(CacheManager);
