@@ -510,3 +510,45 @@ const config = CacheManager.getConfig();
 console.log(config);
 
 ```
+
+### 34. Class Extends
+```js
+'use strict';
+// Class Extends
+// 싱글톤 패턴으로 개발할 수 있는 장점이 있다.
+class cacheManager {
+    constructor(){
+        this.config = [];
+    }
+
+    addConfig (obj = {}) {
+        this.config.push(obj);
+    }
+
+    getConfig () {
+        return this.config;
+    }
+}
+
+const CacheManager = new cacheManager();
+
+module.exports = cacheManager;
+```
+```js
+'use strict';
+
+const cacheManager =require('./cache');
+
+class sessionManager extends cacheManager {}
+
+const SessionManager = new sessionManager();
+
+// cacheManager 에서 상속받은 메소드를 사용할 수 있다
+SessionManager.addConfig({
+    token: 'random'
+})
+
+const config = SessionManager.getConfig();
+
+console.log(config);
+```
