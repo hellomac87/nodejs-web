@@ -1,15 +1,20 @@
 'use strict';
-// Generator
 
-// generator 에서는 arrow function을 사용할 수 없다
-function* log(){
-    console.log(0, yield);
-    console.log(1, yield);
-    console.log(2, yield);
-}
+// timeout?: number 는 최소 지연(보장)시간을 의미한다
+// 정확한 시간을 의미하지 않음(외부 변수에 의해)
 
-const gen = log();
+const timeoutObj = setTimeout(() => {
+    console.log('first');
+}, 0);
 
-gen.next('zero');
-gen.next('one');
-gen.next('two');
+const immediateObj = setImmediate(() => {
+    console.log('second');
+});
+
+const intervalObj = setInterval(() => {
+    console.log('third');
+}, 1000);
+
+clearTimeout(timeoutObj);
+clearInterval(immediateObj);
+clearImmediate(intervalObj);
