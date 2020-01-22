@@ -578,3 +578,31 @@ console.log(a,b);
 // const value = obj.value;
 
 ```
+
+
+### Generator
+
+asunc await 의 등장으로 사용빈도가 줄었지만
+
+Generator 만이 갖고있는 특이점, 장점 등이 많이 있다.
+
+react 에서 사용하는 redux-saga 를 사용하는데 중요한 개념
+
+```js
+'use strict';
+// Generator
+
+// generator 에서는 arrow function을 사용할 수 없다
+function* log(){
+    console.log(0, yield);
+    console.log(1, yield);
+    console.log(2, yield);
+}
+
+const gen = log();
+
+gen.next('zero');
+gen.next('one');
+gen.next('two');
+
+```

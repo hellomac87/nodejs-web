@@ -1,21 +1,15 @@
 'use strict';
-// Destructuring
-// 비구조화 대상에는 object, array 가 있음
+// Generator
 
-// 구조화된 자료
-const obj = {
-    title: 'node.js',
-    value: '올인원 패키지'
-};
+// generator 에서는 arrow function을 사용할 수 없다
+function* log(){
+    console.log(0, yield);
+    console.log(1, yield);
+    console.log(2, yield);
+}
 
-const arr = [0, 1, 2, 3];
+const gen = log();
 
-// 구조분해 할당
-const { title, value } = obj;
-const [, a, b] = arr;
-console.log(title, value);
-console.log(a,b);
-
-// 예전 방식
-// const title = obj.title;
-// const value = obj.value;
+gen.next('zero');
+gen.next('one');
+gen.next('two');
