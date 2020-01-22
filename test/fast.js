@@ -1,28 +1,21 @@
 'use strict';
-// Class
-// 싱글톤 패턴으로 개발할 수 있는 장점이 있다.
-class cacheManager {
-    constructor(){
-        this.config = [];
-    }
+// Destructuring
+// 비구조화 대상에는 object, array 가 있음
 
-    addConfig (obj = {}) {
-        this.config.push(obj);
-    }
+// 구조화된 자료
+const obj = {
+    title: 'node.js',
+    value: '올인원 패키지'
+};
 
-    getConfig () {
-        return this.config;
-    }
-}
+const arr = [0, 1, 2, 3];
 
-const CacheManager = new cacheManager();
+// 구조분해 할당
+const { title, value } = obj;
+const [, a, b] = arr;
+console.log(title, value);
+console.log(a,b);
 
-CacheManager.addConfig({
-    port: 8000,
-});
-CacheManager.addConfig({
-    cert: '../../test.crt',
-});
-
-const config = CacheManager.getConfig();
-console.log(config);
+// 예전 방식
+// const title = obj.title;
+// const value = obj.value;
