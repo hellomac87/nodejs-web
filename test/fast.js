@@ -1,20 +1,23 @@
 'use strict';
 
-// timeout?: number 는 최소 지연(보장)시간을 의미한다
-// 정확한 시간을 의미하지 않음(외부 변수에 의해)
+const dns = require('dns');
 
-const timeoutObj = setTimeout(() => {
-    console.log('first');
-}, 0);
-
-const immediateObj = setImmediate(() => {
-    console.log('second');
+dns.lookup('google.com', (err, address, family) => {
+    console.log(`address: ${address}, ${family}`);
+    // IPv4
 });
 
-const intervalObj = setInterval(() => {
-    console.log('third');
-}, 1000);
+dns.resolve4('archive.org', (err, addresses) => {
+    if(err) throw err;
 
-clearTimeout(timeoutObj);
-clearInterval(immediateObj);
-clearImmediate(intervalObj);
+    const res = JSON.stringify(addresses);
+
+    console.log(res);
+
+    addresses.forEach(a => {
+        dns.reverse(a, (err, hostnames) => {
+            if(err) throw err;
+            console.log(`reverse for ${a}; ${JSON.stringify(hostnames)}`)
+        });
+    })
+})
