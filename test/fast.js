@@ -1,23 +1,21 @@
 'use strict';
 
-const dns = require('dns');
+const fs = require('fs');
 
-dns.lookup('google.com', (err, address, family) => {
-    console.log(`address: ${address}, ${family}`);
-    // IPv4
+fs.readFile('test.txt', 'utf-8', (err, data) => {
+    if(err) {
+        console.error(err);
+        return;
+    }
+    console.log(data);
 });
 
-dns.resolve4('archive.org', (err, addresses) => {
-    if(err) throw err;
+const content = 'something to write';
 
-    const res = JSON.stringify(addresses);
-
-    console.log(res);
-
-    addresses.forEach(a => {
-        dns.reverse(a, (err, hostnames) => {
-            if(err) throw err;
-            console.log(`reverse for ${a}; ${JSON.stringify(hostnames)}`)
-        });
-    })
+fs.writeFile('fast.txt', content, err => {
+    if(err) {
+        console.error(err);
+        return;
+    }
+    console.log('success');
 })
