@@ -730,6 +730,8 @@ writeAndRead('something to write');
 
 ### Promise.all
 
+모든 promise 가 완료될 때 까지 기다림
+
 ```js
 'use strict';
 
@@ -741,5 +743,29 @@ const promise2 = new Promise((resolve, reject) => {
 
 Promise.all([promise1, promise2]) 
 .then(values => console.log(values));
+
+```
+
+### Promise.race
+
+먼저 반환되는 값을 반환
+
+```js
+'use strict';
+
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve(2000), 2000)
+});
+
+const promise2 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('즉시'), 0)
+});
+
+const res = Promise.race([promise1, promise2]) 
+.then(values => console.log(values));
+
+if(res === undefined){
+    
+}
 
 ```
