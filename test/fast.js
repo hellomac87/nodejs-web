@@ -1,14 +1,25 @@
 'use strict';
 
-const http = require('http');
+const https = require('https');
 
-const server = http.createServer((req, res) => {
-    res.statusCode();
-    res.setHeader('Content-Type', 'text/html');
-    res.end('<div>Hello world<div>');
+const options = {
+    hostname: 'google.com',
+    port: 443,
+    path: '/login',
+    method: 'GET' // POST GET PUT DELETE
+}
+
+const req = https.request(options, res => {
+    console.log(`statusCode: ${res.statusCode}`);
+    
+    res.on('data', d => {
+        process.stdout.write(d);
+    });
+
+    req.on('error', e => {
+        console.error(e);
+    })
 });
 
-const port = process.env.PORT;
-server.listen(port, () => {
-    console.log(`Server running at port ${port}`);
-})
+req.end();
+
