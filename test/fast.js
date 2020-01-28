@@ -1,16 +1,14 @@
 'use strict';
 
-const promise1 = new Promise((resolve, reject) => {
-    setTimeout(() => resolve(2000), 2000)
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.statusCode();
+    res.setHeader('Content-Type', 'text/html');
+    res.end('<div>Hello world<div>');
 });
 
-const promise2 = new Promise((resolve, reject) => {
-    setTimeout(() => resolve('즉시'), 0)
-});
-
-const res = Promise.race([promise1, promise2]) 
-.then(values => console.log(values));
-
-if(res === undefined){
-    
-}
+const port = process.env.PORT;
+server.listen(port, () => {
+    console.log(`Server running at port ${port}`);
+})
