@@ -1,18 +1,10 @@
 'use strict';
 
-const fs = require('fs');
-const { promisify } = require('util');
+const promise1 = new Promise((resolve, reject) => resolve('즉시 호출'));
 
-const read = promisify(fs.readFile);
-const write = promisify(fs.writeFile);
+const promise2 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('3초 뒤에 호출'), 3000)
+});
 
-const writeAndRead = async (data = '') => {
-    try {
-        await write('test.txt', data);
-        return (await read('test.txt'));
-    } catch (e) {
-        console.error(e);
-    }
-}; 
-
-writeAndRead('something to write');
+Promise.all([promise1, promise2]) 
+.then(values => console.log(values));
