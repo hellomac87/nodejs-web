@@ -1,35 +1,14 @@
-import React, { Component } from 'react'
+import React, {useState} from 'react'
 
-class Timer extends Component {
-  constructor(props){
-    this.state = {
-      time: new Date()
-    }
-  }
+const App = () => {
+  const [count, setCount] = useState(0)
 
-  componentDidMount(){
-    this.tick();
-  }
-
-  tick = () => {
-    // setState 는 비동기 함수
-    this.setState({
-      time: new Date()
-    }, () => {
-      // state 가 update 된 상태로 출력 보장
-      console.log(this.state)
-    });
-  }
-
-  render() {
-    const {time} = this.state;
-
-    return (
-      <div>
-        {time.date.toLoacaleTimeString()}
-      </div>
-    )
-  }
+  return(
+    <div>
+      {count}
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </div>
+  )
 }
 
-export default Timer;
+export default App;

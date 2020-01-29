@@ -1,7 +1,7 @@
 ## react-redux
 
 
-### 12. setState 실무 테크닉
+### setState 실무 테크닉
 
 setState 의 비동기적 특성에 대한 callbakc function 사용
 
@@ -41,4 +41,27 @@ class Timer extends Component {
 }
 
 export default Timer;
+```
+
+### state hook
+
+react component 의 단점
+
+재사용성 상의 문제점
+
+```js
+import React, {useState} from 'react'
+
+const App = () => {
+  const [count, setCount] = useState(0)
+
+  return(
+    <div>
+      {count}
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </div>
+  )
+}
+
+export default App;
 ```
