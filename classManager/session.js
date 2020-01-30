@@ -1,8 +1,8 @@
 'use strict';
 
-const cacheManager =require('./cache');
+const cacheManager = require('./cache');
 
-class sessionManager extends cacheManager {}
+class sessionManager extends cacheManager { }
 
 const SessionManager = new sessionManager();
 
