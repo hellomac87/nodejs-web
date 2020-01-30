@@ -1,86 +1,40 @@
-import React, { useState } from 'react'
-// react 는 재사용 가능한 component 기반의 UI liberary다
-
-const Todo = ({ todo, index, completeTodo, removeTodo }) => {
-  return (
-    <>
-      <div
-        key={index}
-        className="todo"
-        style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
-      >
-        {todo}
-      </div>
-      <div>
-        <button onClick={() => completeTodo(index)}>Complete</button>
-        <button onClick={() => removeTodo(index)}>X</button>
-      </div>
-    </>
-  )
-}
-
-const TodoForm = ({ addTodo }) => {
-  const [value, setValue] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!value) return;
-
-    addTodo(value);
-
-    setValue('');
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="input"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-      />
-    </form>
-  )
-}
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 
 const App = () => {
-  const [todo, setTodo] = useState([]);
-  const addTodo = text => {
-    const newTodos = [...todo, text]
-    setTodo(newTodos)
-  };
+  const [data, setData] = useState({ hits: [] })
+  const [query, setQuery] = useState('react');
 
-  const completeTodo = index => {
-    const newTodos = [...todo];
-    newTodos[index].isCompleted = true;
-    setTodo(newTodos);
-  };
+  useEffect(() => {
+    let completed = false;
 
-  const removeTodo = index => {
-    const newTodos = [...todo];
-    newTodos.slice(index, 1);
-    setTodo(newTodos);
-  }
+    async function get() {
+      const result = await axios(`https://hn.algolia.com/api/v1/search?query=${query}`)
+      if (!completed) setData(result.data);
+    }
+
+    get();
+
+    return () => {
+      completed = true;
+    };
+  }, [query]);
 
   return (
-    <div className="app">
-      <div className="todo-list">
+    <>
+      <input value={query} onChange={e => setQuery(e.target.value)} />
+
+      <ul>
         {
-          todo.map((item, index) => (
-            <Todo
-              key={item}
-              index={index}
-              todo={todo}
-              completeTodo={completeTodo}
-              removeTodo={removeTodo}
-            />
+          data.hits.map((item, idx) => (
+            <li key={item.objectID}>
+              <a href={item.url}>{item.title}</a>
+            </li>
           ))
         }
-        <TodoForm addTodo={addTodo} />
-      </div>
-    </div>
+      </ul>
+    </>
   )
-
 }
 
 export default App;
