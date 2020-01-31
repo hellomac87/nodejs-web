@@ -1,39 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import React, { useState } from 'react'
 
-const App = () => {
-  const [data, setData] = useState({ hits: [] })
-  const [query, setQuery] = useState('react');
+const Component = (props) => (
+  <div className={props.name}>{props.children}</div>
+);
 
-  useEffect(() => {
-    let completed = false;
-
-    async function get() {
-      const result = await axios(`https://hn.algolia.com/api/v1/search?query=${query}`)
-      if (!completed) setData(result.data);
-    }
-
-    get();
-
-    return () => {
-      completed = true;
-    };
-  }, [query]);
-
+const App = (props) => {
   return (
-    <>
-      <input value={query} onChange={e => setQuery(e.target.value)} />
+    <Component name="Comment">
+      <Component name="UserInfo">
+        <img
+          className="Avatar"
+          src={props.author.avatarUrl}
+          alt={props.author.name}
+        />
+        <Component name="UserInfo-name">
+          {props.author.name}
+        </Component>
+      </Component>
 
-      <ul>
-        {
-          data.hits.map((item, idx) => (
-            <li key={item.objectID}>
-              <a href={item.url}>{item.title}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </>
+      <Component name="Comment-text">
+        {props.text}
+      </Component>
+      <Component name="Comment-date">
+        {formatDate(props.date)}
+      </Component>
+    </Component>
   )
 }
 
