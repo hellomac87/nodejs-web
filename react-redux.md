@@ -66,4 +66,16 @@ const App = () => {
 export default App;
 ```
 
-### effect hook
+### Flux Architecture
+
+- data 의 단방향 흐름제어
+- action => store ( <==> reducer) => react 한 방향으로 일관된 데이터의 흐름
+- side-effect: 단방향성 흐름에 변화를 주는 것
+- `단방향으로 흐르는 것이 무엇이 좋은가?`
+- reduce 함수를 통해서 새로운 데이터를 생성함 (불변성)
+- data의 불변성을 유지하기 위해
+- `왜 data의 불변성을 유지해야 하는가?`
+- flux 아키텍쳐 또한 데이터의 불변성을 유지하기 위해 reducer를 홣용한다.
+- 불변성을 유지하기 위해 reducer pattern 을 사용
+- 기존의 데이터의 변화 없이 새로운 데이터 반환
+
