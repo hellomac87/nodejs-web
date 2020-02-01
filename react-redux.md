@@ -1,42 +1,40 @@
 ## react-redux
 
-
 ### setState 실무 테크닉
 
 setState 의 비동기적 특성에 대한 callbakc function 사용
 
 ```js
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class Timer extends Component {
-  constructor(props){
+  constructor(props) {
     this.state = {
       time: new Date()
-    }
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.tick();
   }
 
   tick = () => {
     // setState 는 비동기 함수
-    this.setState({
-      time: new Date()
-    }, () => {
-      // state 가 update 된 상태로 출력 보장
-      console.log(this.state)
-    });
-  }
+    this.setState(
+      {
+        time: new Date()
+      },
+      () => {
+        // state 가 update 된 상태로 출력 보장
+        console.log(this.state);
+      }
+    );
+  };
 
   render() {
-    const {time} = this.state;
+    const { time } = this.state;
 
-    return (
-      <div>
-        {time.date.toLoacaleTimeString()}
-      </div>
-    )
+    return <div>{time.date.toLoacaleTimeString()}</div>;
   }
 }
 
@@ -50,18 +48,18 @@ react component 의 단점
 재사용성 상의 문제점
 
 ```js
-import React, {useState} from 'react'
+import React, { useState } from "react";
 
 const App = () => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-  return(
+  return (
     <div>
       {count}
       <button onClick={() => setCount(count + 1)}>+</button>
     </div>
-  )
-}
+  );
+};
 
 export default App;
 ```
@@ -112,4 +110,37 @@ function myReducer(state, action){
       // return new state based on action passed
   })
 }
+```
+
+### Styled-components
+
+- 기존 css code 가 js 로직과 완전 분리되어 관리되었다면
+- Styled-components js 로직과 함께 사용 할 수 있음
+
+```jsx
+import React from "react";
+import styled from "styled-components";
+
+const color = "red";
+
+const Component = styled.div`
+  display: ${({ isLoaded }) => (isLoaded ? "block" : "none")};
+  color: ${color};
+`;
+
+// component 상속 및 새로운 속성 추가
+const Wrapper = styled(Component)`
+  background-color: gray;
+  margin: 20px;
+`;
+
+const App = () => {
+  return (
+    <Wrapper isLoaded>
+      <Component isLoaded={true}>complete</Component>
+    </Wrapper>
+  );
+};
+
+export default App;
 ```

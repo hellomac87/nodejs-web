@@ -1,31 +1,25 @@
-import React, { useState } from 'react'
+import React from "react";
+import styled from "styled-components";
 
-const Component = (props) => (
-  <div className={props.name}>{props.children}</div>
-);
+const color = "red";
 
-const App = (props) => {
+const Component = styled.div`
+  display: ${({ isLoaded }) => (isLoaded ? "block" : "none")};
+  color: ${color};
+`;
+
+// component 상속 및 새로운 속성 추가
+const Wrapper = styled(Component)`
+  background-color: gray;
+  margin: 20px;
+`;
+
+const App = () => {
   return (
-    <Component name="Comment">
-      <Component name="UserInfo">
-        <img
-          className="Avatar"
-          src={props.author.avatarUrl}
-          alt={props.author.name}
-        />
-        <Component name="UserInfo-name">
-          {props.author.name}
-        </Component>
-      </Component>
-
-      <Component name="Comment-text">
-        {props.text}
-      </Component>
-      <Component name="Comment-date">
-        {formatDate(props.date)}
-      </Component>
-    </Component>
-  )
-}
+    <Wrapper isLoaded>
+      <Component isLoaded={true}>complete</Component>
+    </Wrapper>
+  );
+};
 
 export default App;
