@@ -144,3 +144,11 @@ const App = () => {
 
 export default App;
 ```
+
+### Side effects
+
+- redux store 에 data에 변화를 유도하는 모든 작업들, 연산들, 요소들이 Side effect
+- redux store 에 상태 변화를 일으키는 요소들
+- redux-thunk, redux-saga
+
+### Redux-saga
