@@ -1,8 +1,27 @@
 "use strict";
 
-// hoisting
-// 정해진 순서와 상관없이 runtime 환경에서 최상위로 재배치
+class Fullstack {
+  constructor(backend, frontend) {
+    this.backend = backend;
+    this.frontend = frontend;
+  }
 
+  getBackend() {
+    return this.backend;
+  }
+  getFrontend() {
+    return this.frontend;
+  }
+
+  setBackend(_backend) {
+    return (this.backend = _backend);
+  }
+  setFrontend(_frontend) {
+    return (this.frontend = _frontend);
+  }
+}
+
+/*
 function fullstack(backend, frontend) {
   this.backend = backend;
   this.frontend = frontend;
@@ -15,10 +34,13 @@ function fullstack(backend, frontend) {
   fullstack.prototype.getFrontend = () => this.frontend;
   fullstack.prototype.setFrontend = () => (this.frontend = frontend);
 }
+*/
 
-const Fullstack = new fullstack("nodejs", "react");
+const fullstack = new Fullstack("javascript", "react");
 
-const be = Fullstack.getBackend();
-const fe = Fullstack.getFrontend();
+fullstack.setBackend("java");
+fullstack.setFrontend("vue");
+const be = fullstack.getBackend();
+const fe = fullstack.getFrontend();
 
 console.log(be, fe);

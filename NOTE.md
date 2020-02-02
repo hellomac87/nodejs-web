@@ -837,3 +837,43 @@ const fe = Fullstack.getFrontend();
 
 console.log(be, fe);
 ```
+
+### Class
+
+내부적으로 closure 를 갖는 방법보다
+
+class 화 하는 것이 좀더 객체지향적 방법이다.
+
+```js
+"use strict";
+
+class Fullstack {
+  constructor(backend, frontend) {
+    this.backend = backend;
+    this.frontend = frontend;
+  }
+
+  getBackend() {
+    return this.backend;
+  }
+  getFrontend() {
+    return this.frontend;
+  }
+
+  setBackend(_backend) {
+    return (this.backend = _backend);
+  }
+  setFrontend(_frontend) {
+    return (this.frontend = _frontend);
+  }
+}
+
+const fullstack = new Fullstack("javascript", "react");
+
+fullstack.setBackend("java");
+fullstack.setFrontend("vue");
+const be = fullstack.getBackend();
+const fe = fullstack.getFrontend();
+
+console.log(be, fe);
+```
