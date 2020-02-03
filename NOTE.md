@@ -877,3 +877,13 @@ const fe = fullstack.getFrontend();
 
 console.log(be, fe);
 ```
+
+### Node.js TDD 실무
+
+TDD 종류
+
+- Mochajs: Fullstack 개발자가 가장 많이 선택하는 framework
+- Istanbul Js: code coverage, 내가 작성한 테스트들을 정량적으로 체크해주는 툴
+- npm tape: Unit test
+- jest: frontend 에서 많이 사용됨
+- cypress: end to end test , ui test
