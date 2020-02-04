@@ -1,46 +1,19 @@
 "use strict";
+// reduce
 
-class Fullstack {
-  constructor(backend, frontend) {
-    this.backend = backend;
-    this.frontend = frontend;
-  }
+const numbers = [0, 1, 2, 3, 4, 5, 6];
 
-  getBackend() {
-    return this.backend;
-  }
-  getFrontend() {
-    return this.frontend;
-  }
+const arr = ["pdf", "html", "html", "gif", "gif", "gif"];
 
-  setBackend(_backend) {
-    return (this.backend = _backend);
-  }
-  setFrontend(_frontend) {
-    return (this.frontend = _frontend);
-  }
-}
+// 과제
+// arr 배열 내에 file type 이 몇번 반복되었는지 객체를 반환하는 코드
 
-/*
-function fullstack(backend, frontend) {
-  this.backend = backend;
-  this.frontend = frontend;
+const res = numbers.reduce(
+  (total, amount) => {
+    if (amount > 0) total.push(amount);
+    return total;
+  },
+  [] //초기값
+);
 
-  // prototype 을 활용한 내부 closer 함수
-  // closer : 해당하는 함수가 함수 외부에 있는 변수에 대해서 접근 할 수 있다.
-  fullstack.prototype.getBackend = () => this.backend;
-  fullstack.prototype.setBackend = () => (this.backend = backend);
-
-  fullstack.prototype.getFrontend = () => this.frontend;
-  fullstack.prototype.setFrontend = () => (this.frontend = frontend);
-}
-*/
-
-const fullstack = new Fullstack("javascript", "react");
-
-fullstack.setBackend("java");
-fullstack.setFrontend("vue");
-const be = fullstack.getBackend();
-const fe = fullstack.getFrontend();
-
-console.log(be, fe);
+console.log(res);

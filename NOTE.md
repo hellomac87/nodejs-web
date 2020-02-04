@@ -887,3 +887,33 @@ TDD 종류
 - npm tape: Unit test
 - jest: frontend 에서 많이 사용됨
 - cypress: end to end test , ui test
+
+### Functional Programming
+
+- Nodejs는 멀티 패러다임을 갖고있음
+- 함수형 프로그래밍의 장점은 무엇인가
+- 단방향 흐름을 이해하는데 있어 중요함
+- 좀더 간결하고 직관적으로 작성하여 유지보수 및 완성도 높은 코드를 만들어보자
+
+- reduce
+
+```js
+"use strict";
+// reduce
+const numbers = [10, 20, 30, 40];
+
+const sum = numbers.reduce((total, value) => total + value);
+
+const avg = numbers.reduce((total, value, index, arr) => {
+  total += value;
+  if (index === arr.length - 1) {
+    return total / arr.length;
+  } else {
+    return total;
+  }
+});
+console.log(sum);
+console.log(avg);
+
+// map과 filter 를 reduce 를 사용하게 되면 한줄의 코드로 사용가능
+```
