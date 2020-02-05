@@ -953,3 +953,29 @@ const res = numbers.reduce(
 
 console.log(answer);
 ```
+
+### nodejs 디자인 패턴
+
+- 싱글톤 패턴
+- epress 서버 기준, 환경 변수를 가지고 있는 개체를 만든다고 가정할때
+- 싱글톤 패턴을 사용하지 않게되면, 유저 요청이 있을 때마다 해당하는 환경설정을 읽거나 업데이트 하는 불필요한 오퍼레이션이 발생한다.
+
+```js
+"use strict";
+
+class CacheManager {
+  constructor() {
+    if (!CacheManager.instance) {
+      this._cache = [];
+      CacheManager.instance = this;
+    }
+
+    return CacheManager.instance;
+  }
+}
+
+const instance = new CacheManager();
+Object.freeze(instance);
+
+// 단일 최초에 한번만 적용되는 싱글톤 패턴의 캐시매니저
+```
