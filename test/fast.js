@@ -1,26 +1,24 @@
 "use strict";
 
 class DatabaseManager {
-  constructor(settings) {
-    // 비동기 함수에 접근 할 수 있어야함
-    // 데이터 베이스 요청, 쿼리등은 네크워크요청이 반드시 필요하다.
-    this.settings = settings;
-    this.init = init; // Promise cache
+  constructor() {}
+
+  // constructor 역할을 static method 가 대신한다
+  static async BUILD(settings) {
+    const config = await this.init(settings);
+    // 수행하고자 하는 모든 비동기 작업
+    return new DatabaseManager(config);
   }
 
   query() {
     // QUERY('') Agnostic
   }
 
-  async init() {} // 최초 1회만 실행
+  async init(settings) {} // 최초 1회만 실행
 
-  async newMember() {
-    // primise 를 반환
-    // pending 상태
-    await this.init();
-  }
+  async newMember() {}
 
-  async deleteMember() {
-    await this.init();
-  }
+  async deleteMember() {}
 }
+
+const manager = DatabaseManager.BUILD({});

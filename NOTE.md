@@ -1068,3 +1068,33 @@ class DatabaseManager {
   }
 }
 ```
+
+### static factory method pattern
+
+- static method 는 생성자로 생성하지 않아도 class 에 바로 접근하여 실행가는한 함수이다.
+
+```js
+"use strict";
+
+class DatabaseManager {
+  constructor() {}
+
+  // constructor 역할을 static method 가 대신한다
+  static async BUILD(settings) {
+    const config = await this.init(settings);
+    return new DatabaseManager(config);
+  }
+
+  query() {
+    // QUERY('') Agnostic
+  }
+
+  async init(settings) {} // 최초 1회만 실행
+
+  async newMember() {}
+
+  async deleteMember() {}
+}
+
+const manager = DatabaseManager.BUILD({});
+```
