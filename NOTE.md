@@ -1005,3 +1005,66 @@ const problem = new study(undefined, undefined);
 
 console.log(problem);
 ```
+
+### 비동기 패턴
+
+- callback hell 문제 해결 promise
+- generator
+- 실무에서 class 를 빈번하게 작성하게 되는데
+- constructor 내부에서는 비동기 함수를 호출 할 수 없다.(?)
+- 하... 진짜 설명 그지같이 못하네
+
+```js
+"use strict";
+
+class Sample {
+  *gen() {
+    let cnt = 0;
+    yield ++cnt;
+  }
+
+  // Computed Property
+  *[Symbol.iterator]() {
+    let cnt = 0;
+    yield cnt++;
+  }
+}
+
+const fn = new Sample();
+
+const gn = fn.gen();
+
+console.log(gn.next());
+console.log(Array.from(Sample));
+```
+
+class 내부의 constructor 에서 비동기 사용하기
+
+```js
+"use strict";
+
+class DatabaseManager {
+  constructor(settings) {
+    // 비동기 함수에 접근 할 수 있어야함
+    // 데이터 베이스 요청, 쿼리등은 네크워크요청이 반드시 필요하다.
+    this.settings = settings;
+    this.init = init; // Promise cache
+  }
+
+  query() {
+    // QUERY('') Agnostic
+  }
+
+  async init() {} // 최초 1회만 실행
+
+  async newMember() {
+    // primise 를 반환
+    // pending 상태
+    await this.init();
+  }
+
+  async deleteMember() {
+    await this.init();
+  }
+}
+```
