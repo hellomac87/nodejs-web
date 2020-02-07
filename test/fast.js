@@ -1,24 +1,21 @@
-"use strict";
+const co = require("co");
 
-class DatabaseManager {
-  constructor() {}
+co(function*() {
+  const a = Promise.resolve(1);
+  const b = Promise.resolve(2);
+  const c = Promise.resolve(3);
 
-  // constructor 역할을 static method 가 대신한다
-  static async BUILD(settings) {
-    const config = await this.init(settings);
-    // 수행하고자 하는 모든 비동기 작업
-    return new DatabaseManager(config);
+  // const res =  Promise.all([a, b, c]);
+  const res = yield [a, b, c];
+  console.log(res);
+}).catch(err => {
+  console.log(err);
+});
+
+co(function*() {
+  try {
+    yield Promise.reject(new Error("error"));
+  } catch (error) {
+    console.error(error);
   }
-
-  query() {
-    // QUERY('') Agnostic
-  }
-
-  async init(settings) {} // 최초 1회만 실행
-
-  async newMember() {}
-
-  async deleteMember() {}
-}
-
-const manager = DatabaseManager.BUILD({});
+});
