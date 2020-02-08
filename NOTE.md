@@ -1128,3 +1128,33 @@ co(function*() {
   }
 });
 ```
+
+### 비동기 프로그래밍 - Race Conditions
+
+- 대규모 사이트를 만드는 경우에 예상치 못한 오류가 발생할 경우 race condition 이 원인인 경우가 많다.
+- input 이 2개 이상일 경우, 자바스크립트 또한 race condition 이 발생한다.
+- `타이밍`, race condition 은 어떠한 input이 먼저 해결될지 선행 조건이 없기 때문에 발생하는 경우가 있다.
+- 선결조건을 명확하게 설정하지 않았기 때문에 발생하는 경우가 많음
+- 실제 운영 환경에서는 굉장히 많은 변수가 있다.
+- 코드상에서 명시적으로 이벤트 루프를 이해하지 못한 경우.
+
+```js
+"use strict";
+
+const arr = [some Promise, some Promise, some Promise];
+
+arr.map(item => {
+  // 비동기 코드, 비동기적으로 실행
+  // 어떤 Promise 가 먼저 실행되는지 알 수 없고
+  // map function 안에서 async await 를 사용하면 안된다.
+  // item간 실행 완료 순서를 보장하지 않는다.
+});
+
+arr.forEach(item => {
+  // 비동기코드 불가능(작동은 하나 순서를 보장하지 않음)
+})
+
+for(const item of arr){
+  // 비동기 코드 가능
+}
+```

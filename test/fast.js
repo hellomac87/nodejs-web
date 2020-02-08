@@ -1,21 +1,20 @@
-const co = require("co");
+"use strict";
 
-co(function*() {
-  const a = Promise.resolve(1);
-  const b = Promise.resolve(2);
-  const c = Promise.resolve(3);
+const arr = [some Promise, some Promise, some Promise];
 
-  // const res =  Promise.all([a, b, c]);
-  const res = yield [a, b, c];
-  console.log(res);
-}).catch(err => {
-  console.log(err);
+arr.map(item => {
+  // 비동기 코드, 비동기적으로 실행
+  // 어떤 Promise 가 먼저 실행되는지 알 수 없고
+  // map function 안에서 async await 를 사용하면 안된다.
+  // item간 실행 완료 순서를 보장하지 않는다.
 });
 
-co(function*() {
-  try {
-    yield Promise.reject(new Error("error"));
-  } catch (error) {
-    console.error(error);
-  }
-});
+arr.forEach(item => {
+  // 비동기코드 불가능(작동은 하나 순서를 보장하지 않음)
+})
+
+for(const item of arr){
+  // 비동기 코드 가능
+}
+
+
