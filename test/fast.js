@@ -51,9 +51,18 @@ class Lock {
     // 푸는 과정이 존재
     const unlock = () => {
       let nextResolve;
-      if (this._waiting.length) {
-        // 강의 화면이 멈춤...씨뻘놈들진짜...
+      if (this._waiting.length > 0) {
+        nextResolve = this._waiting.pop(0);
+        nextResolve(unlock);
+      } else {
+        this._locked = false;
       }
     };
+
+    if (this._locked) {
+      return new Promise(resolve => {
+        this._waiting.push(resolve);
+      });
+    }
   }
 }
