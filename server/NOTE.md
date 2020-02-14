@@ -107,3 +107,46 @@ class ApiServer extends http.Server {
   }
 }
 ```
+
+### 정적 파일 처리
+
+- image, sound, video 등과 같은 파일들
+- nodejs 에서 static file 을 저장하는 것은 바람직하지 않다.
+- static file 은 reverse proxy를 통해 서비스 하는 것이 좋다.
+
+```js
+"use strict";
+
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const http = require("http");
+const helmet = require("helmet");
+const static = require("serve-static");
+
+class ApiServer extends http.Server {
+  constructor(config) {
+    const app = express();
+    super(app);
+    this.app.static = static;
+  }
+
+  async start() {
+    this.app.use(helmet());
+    this.app.use(cookieParser());
+    this.app.use(bodyParser());
+
+    this.app.use(
+      this.app.static(path.join(__dirname, "dist"), {
+        setHeaders: (res, path) => {
+          // 특정한 서버에서 접속핤수 있느냐
+          res.setHeaders("Access-Control-Allow-Origin", "*");
+          // 특정한 리퀘스트에 대한 헤더를 판별하느냐
+          res.setHeaders("Access-Control-Allow-Headers", "*");
+          res.setHeaders("Access-Control-Allow-Method", "GET");
+        }
+      })
+    );
+  }
+}
+```

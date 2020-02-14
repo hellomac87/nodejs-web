@@ -5,11 +5,13 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const http = require("http");
 const helmet = require("helmet");
+const static = require("serve-static");
 
 class ApiServer extends http.Server {
   constructor(config) {
     const app = express();
     super(app);
+    this.app.static = static;
   }
 
   async start() {
@@ -17,20 +19,16 @@ class ApiServer extends http.Server {
     this.app.use(cookieParser());
     this.app.use(bodyParser());
 
-    // custom middleware
-    this.app.use((err, req, res, next) => {
-      // 수행하고자 하는 로직을 작성
-      console.error(`Internal error`, err);
-      if (req) {
-        // 모든 리퀘스트를 로깅
-        console.log(req);
-      }
-      if (res) {
-        // 모든 리퀘스트를 로깅
-        console.log(res);
-      }
-      // 수행하고자 하는 로직이 완료되었다면.
-      next();
-    });
+    this.app.use(
+      this.app.static(path.join(__dirname, "dist"), {
+        setHeaders: (res, path) => {
+          // 특정한 서버에서 접속핤수 있느냐
+          res.setHeaders("Access-Control-Allow-Origin", "*");
+          // 특정한 리퀘스트에 대한 헤더를 판별하느냐
+          res.setHeaders("Access-Control-Allow-Headers", "*");
+          res.setHeaders("Access-Control-Allow-Method", "GET");
+        }
+      })
+    );
   }
 }
