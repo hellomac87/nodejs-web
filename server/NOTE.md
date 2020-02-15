@@ -150,3 +150,15 @@ class ApiServer extends http.Server {
   }
 }
 ```
+
+### REST API
+
+- 구체적인 action은 메소드로 정의되어있기 떄문에
+- user의 end-point 를 나눠서 작성 할 필요는 없다.
+
+```
+// test.com/user [POST]
+// test.com/user [PUT]
+// test.com/user [DELETE]
+// test.com/user [PATCH]
+```
