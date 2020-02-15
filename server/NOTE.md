@@ -162,3 +162,10 @@ class ApiServer extends http.Server {
 // test.com/user [DELETE]
 // test.com/user [PATCH]
 ```
+
+### Template engine
+
+- [https://handlebarsjs.com/](https://handlebarsjs.com/)
+- pug(jade)
+- ejs
+- [https://npms.io/search?q=express+template](https://npms.io/search?q=express+template)
