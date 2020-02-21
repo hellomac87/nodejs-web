@@ -23,3 +23,13 @@
 
 - 패키지만 설치
 - 설명을 왜케 못하냐
+
+## Websocket vs socket.io
+
+- socket.io 는 nodejs 종속이 아님
+- 브라우저간의 호환성을 해결하기 위한 솔루션이 socket.id
+- 웹소켓이 런타임에서 작동하지 않는다면 polling 방식으로 이를 해결한다.
+
+```js
+const socketIo = websocket || polling;
+```
