@@ -33,3 +33,5 @@
 ```js
 const socketIo = websocket || polling;
 ```
+
+## 프로젝트 구성
