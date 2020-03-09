@@ -27,7 +27,7 @@ app.use(favicon("./dist/favicon.ico"));
 app.disable("x-powerd-by");
 io.sockets.on("connection", socket => {
   let room = "";
-  // sending to all client in the room (channel) except sender
+  // sending to all clients in the room (channel) except sender
   socket.on("message", message =>
     socket.broadcast.to(room).emit("message", message)
   );
@@ -45,5 +45,21 @@ io.sockets.on("connection", socket => {
       // max two clients
       socket.emit("full", room);
     }
+  });
+  socket.on("auth", data => {
+    data.sid = socket.id;
+    // sending to all clients in the room (channel) except sender
+    socket.broadcast.to(room).emit("approve", data);
+  });
+  socket.on("accept", id => {
+    io.sockets.connected[id].join(room);
+    // sending to all clients in 'game' room(channel), include sender
+    io.in(room).emit("bridge");
+  });
+  socket.on("reject", () => socket.emit("full"));
+  socket.on("leave", () => {
+    // sending to all clients in the room (channel) except sender
+    socket.broadcast.to(room).emit("hangup");
+    socket.leave(room);
   });
 });
